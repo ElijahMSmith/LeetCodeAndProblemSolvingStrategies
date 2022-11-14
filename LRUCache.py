@@ -11,6 +11,13 @@ class LinkedList:
         self.tail = None
         self.size = 0
 
+    def printSelf(self):
+        temp = self.head
+        while temp != None:
+            print(temp.val, end=" ")
+            temp = temp.next
+        print()
+
     def pop(self):
         temp = self.head
         if temp == None:
@@ -19,6 +26,8 @@ class LinkedList:
         self.head = self.head.next
         if self.head != None:
             self.head.prev = None
+        else:
+            self.tail = None
 
         self.size -= 1
         return temp.val
@@ -77,13 +86,16 @@ class LRUCache:
         self.capacity = capacity
 
     def get(self, key: int) -> int:
+        # print("Get - " + str(key))
         if not self.values.__contains__(key):
             return -1
         keyNode, value = self.values.get(key)
         self.queue.moveToEnd(keyNode)
+        # self.queue.printSelf()
         return value
 
     def put(self, key: int, value: int) -> None:
+        # print("Put - " + str(key) + " -> " + str(value))
         if self.values.__contains__(key):
             keyNode, oldValue = self.values.get(key)
             self.values[key] = (keyNode, value)
@@ -91,10 +103,13 @@ class LRUCache:
         else:
             if self.queue.size >= self.capacity:
                 oldKey = self.queue.pop()
-                self.values.pop(oldKey)
-
+                oldTuple = self.values.pop(oldKey)
+                # print("Popped :" + str(oldTuple))
+                # self.queue.printSelf()
             keyNode = self.queue.append(key)
             self.values[key] = (keyNode, value)
+        # print("Queue at end:")
+        # self.queue.printSelf()
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
