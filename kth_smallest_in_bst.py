@@ -1,14 +1,12 @@
 
-≈'''
-
-
+'''
 230. Kth Smallest Element in a BST
 https://leetcode.com/problems/kth-smallest-element-in-a-bst/
 
 The approach uses the inorder traversal of a binary tree (important as this is a BST) and leverages pass by reference to avoid global variables.
 '''
 
-## Uncommented solution in Python3
+## Uncommented solution in Python3 using pass by reference to mimic a "global variable" in recursion. Alternatively, can use an actual global variable for k.
 
 class Solution:
     
